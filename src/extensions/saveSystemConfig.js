@@ -1,7 +1,9 @@
 const yaml = require('js-yaml');
 
 let defaultConfig = {
-  sshKey: `~/.ssh/id_rsa`
+  sshKey: `~/.ssh/id_rsa`,
+  PORT: 2121,
+  update: 86400
 }
 
 module.exports = toolbox => {

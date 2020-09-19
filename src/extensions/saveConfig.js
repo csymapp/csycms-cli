@@ -4,7 +4,8 @@ let defaultConfig = {
   PORT: 0,
   domain: 'localhost',
   documentation: true,
-  repo: ''
+  repo: '',
+  update: 1
 }
 
 module.exports = toolbox => {

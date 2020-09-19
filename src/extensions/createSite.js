@@ -53,7 +53,11 @@ module.exports = toolbox => {
       if (config.repo) {
         remoteUrl = config.repo
       }
-      await shell.exec(`GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git clone ${remoteUrl} /var/www/html/csycms/${siteName}`)
+      let create = await shell.exec(`GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git clone ${remoteUrl} /var/www/html/csycms/${siteName}`)
+      if (create.stderr.includes('fatal:')) {
+        toolbox.print.error(`Failed to create site.`)
+        return;
+      }
     }
     await toolbox.disableSite(false);
     await toolbox.saveConfig(siteName, config)

@@ -16,31 +16,53 @@ module.exports = toolbox => {
     siteNames = Object.keys(sites);
 
     let forks = {}
+    let scheduledSiteUpdates = {}
+
+    let scheduleUpdate = (siteIdentifier, config) => {
+      let siteName = siteIdentifier.replace(/:[0-9]*$/, '')
+      if (config.update && config.update > 0) {
+        scheduledSiteUpdates[siteIdentifier] = setInterval(() => { toolbox.pullSite(true, siteName) }, config.update * 1000) // interval in ms
+      }
+    }
+
+    let unscheduleUpdate = (siteIdentifier) => {
+      if (scheduledSiteUpdates[siteIdentifier]) {
+        clearInterval(scheduledSiteUpdates[siteIdentifier])
+        delete scheduledSiteUpdates[siteIdentifier];
+      }
+    }
+
     let monitorFork = (siteName, config) => {
       let port = config.PORT
       let siteIdentifier = `${siteName}:${port}`
       const process = fork(path.join(__dirname, '../_extensions/index.js'));
       forks[siteIdentifier] = process
+      scheduleUpdate(siteIdentifier, config)
+
       process.send({ 'start': config });// config...
       eventEmitter.emit('started', siteIdentifier);
       return process;
     }
 
-    let forkSiteProcess = async (siteName, port) => {
+    let forkSiteProcess = async (siteName, configStdIn = {}/*, port*/) => { //add config here to the one we read from file... (1)
       let config = await toolbox.readSiteConfig(false, siteName)
-      config.PORT = port || config.PORT
-      port = config.PORT
+      for (let key in configStdIn) {
+        config[key] = configStdIn[key]
+      }
+      // await toolbox.fixMissingSiteDir(true, siteName, config)
+      let port = config.PORT
       let siteIdentifier = `${siteName}:${port}`
       let process = monitorFork(siteName, config);
       process.on('close', (code) => {
         delete forks[siteIdentifier];
+        unscheduleUpdate(siteIdentifier);
         let interval = 0;
         code === 1 ? interval = 5000 :
           code === 130 ? interval = 50 : false;
         switch (code) {
           case 1:
           case 130:
-            setTimeout(() => { forkSiteProcess(siteName, port) }, interval)
+            setTimeout(() => { forkSiteProcess(siteName, config) }, interval)
             break;
         }
         let eventType;
@@ -84,7 +106,7 @@ module.exports = toolbox => {
             sendMessage(JSON.stringify({ error: `${siteIdentifier} has already been started. Can't start` }))
             break;
           }
-          forkSiteProcess(siteName, port)
+          forkSiteProcess(siteName, config)
           eventEmitter.once('started', (message) => {
             if (message === siteIdentifier) {
               let message = `${siteIdentifier} started`
@@ -135,9 +157,19 @@ module.exports = toolbox => {
             }
           });
           break;
+        case 'running':
+          let runningSitePorts = [];
+          for (let siteIdentifierInner in forks) {
+            let runningSiteName = siteIdentifierInner.replace(/:[0-9]*$/, '');
+            if (runningSiteName === siteName) {
+              runningSitePorts.push(siteIdentifierInner)
+            }
+          }
+          sendMessage(JSON.stringify({ success: runningSitePorts }))
+          break;
       }
     });
-
+    let sysConfig = await toolbox.readSystemConfig()
     server.on('listening', function () {
       let address = server.address();
       let port = address.port;
@@ -150,6 +182,11 @@ module.exports = toolbox => {
     server.on('close', function () {
       console.log('Socket is closed !');
     });
-    server.bind(2222);
+    server.bind(sysConfig.PORT);
+
+    if (sysConfig.update && sysConfig.update > 0) {
+      toolbox.sysUpdate()
+      setInterval(() => { toolbox.sysUpdate() }, parseInt(sysConfig.update) * 1000)// * 10000
+    }
   }
 }

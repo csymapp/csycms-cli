@@ -33,11 +33,7 @@ module.exports = toolbox => {
     let promises = availableSitesFiles.map(loadSiteSettings)
     let [err, care] = await to(Promise.all(promises));
 
-
-    // care.push(['Enabled', 'Name', 'PORT', 'Domain', 'Repo']);
-    // console.log('ppppppppppppppppp')
-    // console.log(care)
-    let fields = { "fields": ['Enabled', 'PORT', 'Domain', 'Documentation', 'Repo'] }
+    let fields = { "fields": ['Enabled', 'PORT', 'Domain', 'Documentation', 'Repo', 'Update Interval'] }
     let retFields = {}
     // enabled Sites
     care.map(item => {

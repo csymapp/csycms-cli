@@ -2,8 +2,9 @@
 //   figlet = require('figlet'),
 //   shell = require('shelljs'),
 //   NginxConfFile = require('nginx-conf').NginxConfFile;
+const to = require("await-to-js").to
 
-let description = 'csycms site --action\nSite actions:\n--list list sites.\n--create Create a new Site. -n "site name" -d sitedomain -p PORT [-r siteRepository -d sitedomain -D remove documentation]\n--enable  -n "site name" Enable  site\n--disable  -n "site name" Disable site.\n--exists  -n "site name" Check if site exists.\n--remote:\n\t--add -N <name> -u <url>\n\t--remove -N <name>\n\t-v equivalent to git remote -v\n--rename  -n <site name> -N <new name>\n--delete  -n <site name>\n--duplicate  -n <site name> -d <destination>\n--pull  -n <site name>\n--sync  -n <site name> -m <message>\n--config  -n <site name>\n--start -n <site name> -p <PORT> If port is not supplied, it uses the port in config file\n--stop -n <site name> -p <PORT> Provide either port or site name. If port is not supplied, it uses the port in config file\n--restart -n <site name> -p <PORT> Provide either port or site name. If port is not supplied, it uses the port in config file'
+let description = 'csycms site --action\nSite actions:\n--list list sites.\n--create Create a new Site. -n "site name" -d sitedomain -p PORT [-r siteRepository -d sitedomain -D remove documentation]\n--enable  -n "site name" Enable  site\n--disable  -n "site name" Disable site.\n--exists  -n "site name" Check if site exists.\n--remote:\n\t--add -N <name> -u <url>\n\t--remove -N <name>\n\t-v equivalent to git remote -v\n--rename  -n <site name> -N <new name>\n--delete  -n <site name>\n--duplicate  -n <site name> -d <destination>\n--pull  -n <site name>\n--sync  -n <site name> -m <message>\n--config  -n <site name>\n--start -n <site name> -p <PORT> -u <Update interval>. Don\'t use in development.\n\tIf port is not supplied, it uses the port in config file\n--stop -n <site name> -p <PORT> Provide either port or site name. If port is not supplied, it uses the port in config file\n--restart -n <site name> -p <PORT> Provide either port or site name. If port is not supplied, it uses the port in config file\n--getrunning  -n <site name> Get all ports on which site is being served.'
 
 const command = {
   name: 'site',
@@ -61,10 +62,14 @@ const command = {
         await toolbox.configSite(true);
         break;
       case "start":/** */
-        await toolbox.startSite(true);
+        await to(toolbox.startSite(true));
         break;
       case "stop":/** */
         await toolbox.stopSite(true);
+        break;
+      case "running":/** */
+      case "getrunning":/** */
+        await toolbox.getRunning(true);
         break;
       case "restart":/** */
         await toolbox.restartSite(true);
