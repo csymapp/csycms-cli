@@ -15,13 +15,20 @@ module.exports = toolbox => {
       return
     }
     let config = { siteName };
-    if (toolbox.parameters.options.p) {
-      config.PORT = toolbox.parameters.options.p
-    } else {
-      if (port) {
-        config.PORT = port
+    if (!port) {
+      if (toolbox.parameters.options.p) {
+        port = toolbox.parameters.options.p
       }
+      // else {
+      //   if (port) {
+      //     config.PORT = port
+      //   }
+      // }
     }
+    if (port) {
+      config.PORT = port
+    }
+
     config.action = 'stop'
     await to(toolbox.sendUDP(config, immediate))
   }

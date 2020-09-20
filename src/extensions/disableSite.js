@@ -20,6 +20,7 @@ module.exports = toolbox => {
       if (print) { toolbox.print.error(`${siteName} is disabled!`) }
       return false
     }
+    await toolbox.stopSiteServers(false, true, siteName);
     shell.exec(`unlink /etc/csycms/sites-enabled/${siteName}.yml`)
     if (print) {
       toolbox.print.success(`${siteName} has been disabled.`)

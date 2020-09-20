@@ -14,19 +14,20 @@ module.exports = toolbox => {
       toolbox.print.error(`${siteName} does not exist!`)
       return
     }
-    let [err, care] = await to(toolbox.getRunning(false, true))
-    let runningSitePorts = []
-    if (!err) {
-      runningSitePorts = care
-    }
+    // let [err, care] = await to(toolbox.getRunning(false, true))
+    // let runningSitePorts = []
+    // if (!err) {
+    //   runningSitePorts = care
+    // }
 
-    let stopSiteServers = async (siteIdentifier) => {
-      let site = siteIdentifier.replace(/:[0-9]*$/, '')
-      let port = siteIdentifier.replace(site, '').replace(":",'')
-      await toolbox.stopSite(false, true, site, port)
-    }
-    await Promise.all(runningSitePorts.map(stopSiteServers))
+    // let stopSiteServers = async (siteIdentifier) => {
+    //   let site = siteIdentifier.replace(/:[0-9]*$/, '')
+    //   let port = siteIdentifier.replace(site, '').replace(":",'')
+    //   await toolbox.stopSite(false, true, site, port)
+    // }
+    // await Promise.all(runningSitePorts.map(stopSiteServers))
 
+    await toolbox.stopSiteServers(false, true, siteName);
     let siteEnabled = siteExists[0];
     if (siteEnabled) {
       await toolbox.disableSite(false);

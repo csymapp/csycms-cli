@@ -1,19 +1,14 @@
-// add your CLI-specific functionality here, which will then be accessible
-// to your commands
 const fs = require('fs-extra');
 const yaml = require('js-yaml')
 const to = require('await-to-js').to
 
-// const shell = require('shelljs')
-// const path = require('path')
-// const packageJson = require(path.join(__dirname, '../..', 'package.json'))
-
 module.exports = toolbox => {
   toolbox.listSites = async (print = false) => {
+    if (toolbox.parameters.options.n) {
+      toolbox.parameters.options.s = true
+    }
     let availableSitesFiles = toolbox.filesystem.list('/etc/csycms/sites-available').filter(item => item.slice(-4) !== '.swp')
     let enabledSitesFiles = toolbox.filesystem.list('/etc/csycms/sites-enabled')
-    // console.log(availableSitesFiles)
-    // console.log(enabledSitesFiles)
 
     let loadSiteSettings = async (siteName) => {
       let savedConfigs = fs.readFileSync(
@@ -54,13 +49,28 @@ module.exports = toolbox => {
         retFields[siteName] = [siteEnabled, ...Object.values(yamlObject)]
       }
     })
-    // console.log('ppppppppppppppppp')
-    // console.log(fields)
-    // fields["site1"] = [0, 1]
-    // fields["site2"] = [0, 1]
-    // console.table([fields, {"enabled":[0,1]},{"DIS":[1,2]}])
+    let siteCounter = 0;
     if (print) {
-      console.table(fields)
+      let splitList = toolbox.parameters.options.s
+      if (splitList) {
+        care.map(item => {
+          let siteNametoList = item[0]
+          if (!toolbox.parameters.options.n) {
+            let siteConfig = item[1]
+            siteConfig.Enabled = fields[siteNametoList][0]
+            console.log(`#${++siteCounter}`)
+            console.log(`SITE: ${siteNametoList}`)
+            for (let key in siteConfig) {
+              console.log(`${key}:${siteConfig[key]}`)
+            }
+            console.log('-------------')
+          } else {
+            console.log(`#${++siteCounter}:${siteNametoList}`)
+          }
+        })
+      } else {
+        console.table(fields)
+      }
     }
 
     return retFields
