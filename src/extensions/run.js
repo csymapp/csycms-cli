@@ -37,6 +37,7 @@ module.exports = toolbox => {
       let siteIdentifier = `${siteName}:${port}`
       const process = fork(path.join(__dirname, '../_extensions/index.js'));
       forks[siteIdentifier] = process
+      config.directory = `/var/www/html/csycms/${siteName}`
       scheduleUpdate(siteIdentifier, config)
 
       process.send({ 'start': config });// config...

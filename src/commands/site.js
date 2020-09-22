@@ -77,54 +77,6 @@ const command = {
       default:
         return toolbox.print.error(description)
     }
-    // list sites. From where...
-    // 
-    // 1. clone site (if it does not exist)
-    // console.log(toolbox.parameters)
-
-    // console.log(NginxConfFile)
-
-    // NginxConfFile.create('/etc/nginx/nginx.conf', function (err, conf) {
-    //   if (err) {
-    //     console.log(err);
-    //     return;
-    //   }
-
-    //   //reading values
-    //   console.log(conf.nginx.user._value); //www www
-    //   console.log(conf.nginx.http.server); //one.example.com
-    //   // console.log(conf.nginx.http.server.listen._value); //one.example.com
-
-    //   //if there is more than one directive in a scope (e.g. location), then
-    //   //you access them via array index rather than straight property access
-    //   console.log(conf.nginx.http.server.location[3].root._value); // /spool/www
-
-    //writing values
-    //NginxConfFile.create() automatically sets up a sync, so that whenever
-    //a value is changed, or a node is removed/added, the file gets updated
-    //immediately
-
-    // })
-    // process.exit();
-    // console.log(
-    //   chalk.cyan(figlet.textSync('Initializing..', {
-    //     horizontalLayout: 'full'
-    //   }))
-    // )
-    // await toolbox.init();
-
-
-
-    // shell.exec('sudo apt-get update --assume-yes')
-    // // nginx
-    // shell.exec('sudo apt install nginx --assume-yes')
-    // // certbot
-    // shell.exec('sudo apt-get install software-properties-common --assume-yes')
-    // shell.exec('sudo add-apt-repository universe --assume-yes')
-    // shell.exec('sudo add-apt-repository ppa:certbot/certbot --assume-yes')
-    // shell.exec('sudo apt-get update --assume-yes')
-    // shell.exec('sudo apt-get install certbot python3-certbot-nginx --assume-yes')
-    // shell.exec('systemctl start csycms')
   }
 }
 

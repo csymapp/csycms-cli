@@ -18,7 +18,7 @@ module.exports = toolbox => {
 
     let siteExists = await toolbox.siteExists(false);
     if (!siteExists) {
-        return print?toolbox.print.error(`site ${siteName} does not exist!`):false
+      return print ? toolbox.print.error(`site ${siteName} does not exist!`) : false
     }
 
     if (toolbox.parameters.options.remove) {
@@ -26,16 +26,16 @@ module.exports = toolbox => {
     }
     if (toolbox.parameters.options.add) {
       if (action === 'remove') {
-        return print?toolbox.print.error(description):false
+        return print ? toolbox.print.error(description) : false
       }
       action = 'add'
       if (!toolbox.parameters.options.u) {
-        return tprint?oolbox.print.error(description):false
+        return tprint ? oolbox.print.error(description) : false
       }
     }
-    if (toolbox.parameters.options.v) {
+    if (toolbox.parameters.options.v || toolbox.parameters.options.view) {
       if (action !== '') {
-        return print?toolbox.print.error(description):false
+        return print ? toolbox.print.error(description) : false
       }
       action = 'view'
     }
@@ -46,23 +46,25 @@ module.exports = toolbox => {
       case 'add':
         result = shell.exec(`cd /var/www/html/csycms/${siteName} && git remote add ${remoteName} ${remoteUrl}`, { silent: !print })
         if (result.stderr.length > 0) {
-          return print?toolbox.print.error(result.stderr):false
+          return print ? toolbox.print.error(result.stderr) : false
         }
-        print?toolbox.print.success(`${remoteName} added to ${siteName}`):false
+        print ? toolbox.print.success(`${remoteName} added to ${siteName}`) : false
         break;
       case 'remove':
         result = shell.exec(`cd /var/www/html/csycms/${siteName} && git remote rm ${remoteName}`, { silent: !print })
         if (result.stderr.length > 0) {
-          return print?toolbox.print.error(result.stderr):false
+          return print ? toolbox.print.error(result.stderr) : false
         }
-        print?toolbox.print.success(`${remoteName} removed from ${siteName}`):false
+        print ? toolbox.print.success(`${remoteName} removed from ${siteName}`) : false
         break;
       case 'view':
         result = shell.exec(`cd /var/www/html/csycms/${siteName} && git remote -v`, { silent: !print })
         if (result.stderr.length > 0) {
-          return print?toolbox.print.error(result.stderr):false
+          return print ? toolbox.print.error(result.stderr) : false
         }
         break;
+      default:
+        return toolbox.print.error(description)
     }
   }
 }

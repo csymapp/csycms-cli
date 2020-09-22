@@ -15,13 +15,15 @@ module.exports = toolbox => {
     } = toolbox
     filesystem.dir('/var/www/html/csycms/'); // data directory
     // filesystem.dir('/var/www/html/csycms/content'); // data directory
-    // filesystem.dir('/var/www/html/csycms/themes');
-    // filesystem.dir('/var/www/html/csycms/layout');
-    // filesystem.dir('/var/www/html/csycms/public');
+    filesystem.dir('/var/www/html/csycms/themes');
+    filesystem.dir('/var/www/html/csycms/templates');
+    filesystem.dir('/var/www/html/csycms/public');
     filesystem.dir('/etc/csycms/sites-available');  // config directory
     filesystem.dir('/etc/csycms/sites-enabled');  // config directory
     filesystem.dir('/usr/share/csycms/data'); 
     filesystem.dir('/usr/share/csycms/bin');
+
+    await toolbox.pullTheme(true);
 
     let serviceExists = await shell.exec(`systemctl status csycms`)
     if (serviceExists.stderr.includes('could not be found')) {
