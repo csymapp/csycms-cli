@@ -23,7 +23,7 @@ module.exports = toolbox => {
     filesystem.dir('/usr/share/csycms/data'); 
     filesystem.dir('/usr/share/csycms/bin');
 
-    await toolbox.pullTheme(true);
+    await toolbox.pullTheme(true, 'default');
 
     let serviceExists = await shell.exec(`systemctl status csycms`)
     if (serviceExists.stderr.includes('could not be found')) {

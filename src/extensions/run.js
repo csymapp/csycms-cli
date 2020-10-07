@@ -38,6 +38,14 @@ module.exports = toolbox => {
       const process = fork(path.join(__dirname, '../_extensions/index.js'));
       forks[siteIdentifier] = process
       config.directory = `/var/www/html/csycms/${siteName}`
+      config.content_dir = `/var/www/html/csycms/${siteName}/content`
+      config.themes_dir = `/var/www/html/csycms/themes/`
+      config.scheme = config.scheme ? config.scheme : 'http'
+      if(config.domain === 'localhost' || config.domain.match(/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]/)){
+        config.domain = `${config.domain}:${port}`
+      }
+      config.base_url = `${config.scheme}://${config.domain}`
+      config.thisYear = new Date().getFullYear();
       scheduleUpdate(siteIdentifier, config)
 
       process.send({ 'start': config });// config...
@@ -117,7 +125,7 @@ module.exports = toolbox => {
           });
           eventEmitter.once('failed', (message) => {
             if (message === siteIdentifier) {
-              let message = `${siteIdentifier} failed to start. Will keep retrying.`
+              let message = `${siteIdentifier} failed to start. Please check that the port is not in use, and we will keep trying.`
               message = JSON.stringify({ error: message })
               sendMessage(message)
             }
@@ -138,7 +146,7 @@ module.exports = toolbox => {
           });
           eventEmitter.once('failed', (message) => {
             if (message === siteIdentifier) {
-              let message = `${siteIdentifier} failed to start. Will keep retrying.`
+              let message = `${siteIdentifier} failed to start. Please check that the port is not in use, and we will keep trying.`
               message = JSON.stringify({ error: message })
               sendMessage(message)
             }

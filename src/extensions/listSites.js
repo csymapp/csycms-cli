@@ -36,8 +36,8 @@ module.exports = toolbox => {
       let yamlObject = item[1]
       let siteEnabled = enabledSitesFiles.includes(siteName) ? true : false
       if (siteEnabled) {
-        fields[siteName] = [siteEnabled, ...Object.values(yamlObject)]
-        retFields[siteName] = [siteEnabled, ...Object.values(yamlObject)]
+        fields[siteName] = [siteEnabled, ...Object.values(yamlObject).splice(0,5)]
+        retFields[siteName] = [siteEnabled, ...Object.values(yamlObject).splice(0,5)]
       }
     })// Not enabled
     care.map(item => {
@@ -45,11 +45,12 @@ module.exports = toolbox => {
       let yamlObject = item[1]
       let siteEnabled = enabledSitesFiles.includes(siteName) ? true : false
       if (!siteEnabled) {
-        fields[siteName] = [siteEnabled, ...Object.values(yamlObject)]
-        retFields[siteName] = [siteEnabled, ...Object.values(yamlObject)]
+        fields[siteName] = [siteEnabled, ...Object.values(yamlObject).splice(0,5)]
+        retFields[siteName] = [siteEnabled, ...Object.values(yamlObject).splice(0,5)]
       }
     })
     let siteCounter = 0;
+
     if (print) {
       let splitList = toolbox.parameters.options.s
       if (splitList) {
@@ -61,7 +62,7 @@ module.exports = toolbox => {
             console.log(`#${++siteCounter}`)
             console.log(`SITE: ${siteNametoList}`)
             for (let key in siteConfig) {
-              console.log(`${key}:${siteConfig[key]}`)
+              console.log(`${key}:${JSON.stringify(siteConfig[key])}`)
             }
             console.log('-------------')
           } else {

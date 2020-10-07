@@ -1,4 +1,5 @@
 const yaml = require('js-yaml');
+const fs = require('fs-extra');
 
 let defaultConfig = {
   sshKey: `~/.ssh/id_rsa`,
@@ -15,7 +16,9 @@ module.exports = toolbox => {
     for (let i in config) {
       extendedConfig[i] = config[i]
     }
-    toolbox.filesystem.write(`/etc/csycms/config/system.yml`, `${yaml.safeDump(config)}`);
+    if (!fs.existsSync(`/etc/csycms/config/system.yml`)) {
+      toolbox.filesystem.write(`/etc/csycms/config/system.yml`, `${yaml.safeDump(config)}`);
+    }
     return true;
   }
 }

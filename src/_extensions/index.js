@@ -55,13 +55,7 @@ async function runSite(config) {
     let server = app.listen(config.PORT, () => {
         console.log('Express HTTP server listening on port ' + server.address().port);
     });
-    // logic for
-    // sending multiple mails
-    // console.log(config)
-    // console.log(config)
-    // console.log(config)
-    console.log('has JUST ++++++++++++++++++++++++++++++++')
-    return sendMails;
+    return true;
 }
 // receive message from master process
 process.on('message', async (message) => {

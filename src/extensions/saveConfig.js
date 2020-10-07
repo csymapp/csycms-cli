@@ -3,6 +3,7 @@ const yaml = require('js-yaml');
 let defaultConfig = {
   PORT: 0,
   domain: 'localhost',
+  scheme:'http',
   // base_url: 'http://localhost:4000/', // The base URL of your site (can use %base_url% in Markdown files)
   documentation: true,
   repo: '',

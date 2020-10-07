@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs-extra')
 
 module.exports = toolbox => {
-  let description = `csycms theme --pull -n <theme name> Install or update theme`
+  let description = `csycms theme --pull -n <theme name. Optional. All themes pulled if missing.> Install or update theme`
   toolbox.pullTheme = async (print = false, themeName) => {
     let themes = await toolbox.listThemes(false);
     let themestoPull = [];
