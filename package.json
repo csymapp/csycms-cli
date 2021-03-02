@@ -1,6 +1,6 @@
 {
   "name": "csycms",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "csycms CLI",
   "author": "Brian Onang'o",
   "private": true,
@@ -25,19 +25,21 @@
   "licenses": [
     {
       "type": "Apache-2.0",
-      "url": "https://raw.githubusercontent.com/csymapp/csycms/master/LICENSE"
+      "url": "https://raw.githubusercontent.com/csymapp/csycms-cli/master/LICENSE"
     }
   ],
   "dependencies": {
+    "automatic-updates": "/home/brian/Code/CSECO/automatic-updates",
     "await-to-js": "^2.1.1",
     "chalk": "^4.0.0",
-    "csycms-core": "/media/brian/Ubuntu/home/brian/Code/CSECO/cmsTests/csycms-core",
+    "csycms-core": "/home/brian/Code/CSECO/csycms-core",
     "figlet": "^1.4.0",
     "fs-extra": "^9.0.1",
     "gluegun": "latest",
     "js-yaml": "^3.14.0",
     "lowdb": "^1.0.0",
     "nginx-conf": "^1.5.0",
+    "node-etc": "^1.1.3",
     "service-systemd": "^3.5.1",
     "shelljs": "^0.8.4"
   },
