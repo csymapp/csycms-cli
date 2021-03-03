@@ -1,6 +1,6 @@
 {
   "name": "csycms",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "csycms CLI",
   "author": "Brian Onang'o",
   "private": true,
@@ -29,7 +29,7 @@
     }
   ],
   "dependencies": {
-    "automatic-updates": "/home/brian/Code/CSECO/automatic-updates",
+    "automatic-updates": "^1.0.0",
     "await-to-js": "^2.1.1",
     "chalk": "^4.0.0",
     "csycms-core": "/home/brian/Code/CSECO/csycms-core",

@@ -1,5 +1,5 @@
-const chalk = require('chalk')
-const figlet = require('figlet')
+const chalk = require('chalk');
+const figlet = require('figlet');
 
 const command = {
   name: 'run',
@@ -9,7 +9,7 @@ const command = {
     console.log(
       chalk.cyan(figlet.textSync('csycms run', { horizontalLayout: 'full' }))
     )
-    await toolbox.run()
+    await toolbox.run();
   }
 }
 

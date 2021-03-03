@@ -3,9 +3,11 @@ const path = require("path")
 const udp = require('dgram');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
+const automaticUpdates = require('automatic-updates');
 
 module.exports = toolbox => {
   toolbox.run = async () => {
+    automaticUpdates.init({source:'npm'});
     let sites = await toolbox.listSites(false)
     let siteNames = Object.keys(sites);
     // remove sites that are not enabled

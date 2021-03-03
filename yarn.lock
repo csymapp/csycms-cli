@@ -814,8 +814,10 @@ autolinker@~0.28.0:
   dependencies:
     gulp-header "^1.7.1"
 
-"automatic-updates@file:../automatic-updates":
+automatic-updates@^1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/automatic-updates/-/automatic-updates-1.0.0.tgz#3f6ffcd17aa4324d47e09825274f2f00e9f4a1c1"
+  integrity sha512-xjSnPquoyQgwo/EQxm9B60/EWJHkcoM9F28LopNsqQ0rqXqHYqOxlzpUyiA2Nze8c8apB9/1Ejo+99xcqgBVEQ==
   dependencies:
     etc "^1.1.0"
     mocha "^8.3.0"
