@@ -28,6 +28,7 @@ module.exports = toolbox => {
     } catch (err) {
       console.log(err)
     }
+    // console.log(`/etc/csycms/sites-enabled/${siteName}.yml`)
     let siteConfig = toolbox.filesystem.exists(`/etc/csycms/sites-enabled/${siteName}.yml`)
     if (siteConfig) {
       yamlObject.Enabled = true

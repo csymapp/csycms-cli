@@ -7,7 +7,13 @@ const automaticUpdates = require('automatic-updates');
 
 module.exports = toolbox => {
   toolbox.run = async () => {
-    automaticUpdates.init({source:'npm'});
+    automaticUpdates.on('updated', ()=>{
+      // process.exit()
+    });
+    automaticUpdates.on('notUpdated', ()=>{
+    })
+    // automaticUpdates.init({source:'npm'});
+    
     let sites = await toolbox.listSites(false)
     let siteNames = Object.keys(sites);
     // remove sites that are not enabled
@@ -48,7 +54,8 @@ module.exports = toolbox => {
       }
       config.base_url = `${config.scheme}://${config.domain}`
       config.thisYear = new Date().getFullYear();
-      scheduleUpdate(siteIdentifier, config)
+      scheduleUpdate(siteIdentifier, config);
+     
 
       process.send({ 'start': config });// config...
       eventEmitter.emit('started', siteIdentifier);
@@ -194,10 +201,11 @@ module.exports = toolbox => {
       console.log('Socket is closed !');
     });
     server.bind(sysConfig.PORT);
-
+    // console.log(sysConfig);process.exit();
     if (sysConfig.update && sysConfig.update > 0) {
-      toolbox.sysUpdate()
-      setInterval(() => { toolbox.sysUpdate() }, parseInt(sysConfig.update) * 1000)// * 10000
+      // toolbox.sysUpdate()
+      automaticUpdates.init({interval: parseInt(sysConfig.update), source:'npm'});
+      // setInterval(() => { toolbox.sysUpdate() }, parseInt(sysConfig.update) * 1000)// * 10000
     }
   }
 }

@@ -59,6 +59,7 @@ module.exports = toolbox => {
         return;
       }
     }
+      // check att to config..
     await toolbox.disableSite(false);
     await toolbox.saveConfig(siteName, config)
     await toolbox.enableSite(false);

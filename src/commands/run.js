@@ -6,6 +6,7 @@ const command = {
   description: 'Run your application',
   run: async toolbox => {
     // return new Promise(async (resolve, reject) => {
+    process.chdir(__dirname);
     console.log(
       chalk.cyan(figlet.textSync('csycms run', { horizontalLayout: 'full' }))
     )

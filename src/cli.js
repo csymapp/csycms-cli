@@ -5,6 +5,7 @@ const { build } = require('gluegun')
  */
 async function run (argv) {
   // create a CLI runtime
+  process.chdir(__dirname);
   const cli = build()
     .brand('csycms')
     .src(__dirname)

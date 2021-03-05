@@ -52,6 +52,8 @@ let csycms = require('csycms-core');
 // })
 async function runSite(config) {
     let app = csycms(config);
+    // console.log(config);
+    // process.exit();
     let server = app.listen(config.PORT, () => {
         console.log('Express HTTP server listening on port ' + server.address().port);
     });

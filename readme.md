@@ -41,6 +41,17 @@ sudo csycms stop
 sudo csycms restart
 ```
 
-# configs
+# Get help
 
-## in nginx
+```
+csycms
+```
+
+# Configuration
+
+Set configurations in `/etc/projectname/config/system.yml` with:
+```yaml
+sshKey: ~/.ssh/id_rsa # ssh key
+PORT: 2121 # port for communication between csycms and sites
+update: 86400 # system update interval in seconds
+```
