@@ -7,6 +7,8 @@ let defaultConfig = {
   // base_url: 'http://localhost:4000/', // The base URL of your site (can use %base_url% in Markdown files)
   documentation: true,
   repo: '',
+  staticSiteRepo: '',
+  staticSiteLocation: '', // e.g https://www.cseco.co.ke
   update: 8600, // update interval in seconds
   site: {
     space: 'CSECO',
