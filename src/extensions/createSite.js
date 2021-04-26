@@ -53,7 +53,7 @@ module.exports = toolbox => {
       if (config.repo) {
         remoteUrl = config.repo
       }
-      let create = await shell.exec(`GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git clone ${remoteUrl} /var/www/html/csycms/${siteName}`)
+      let create = await shell.exec(`GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git clone ${remoteUrl} /var/www/html/csycms/${siteName} && cd /var/www/html/csycms/${siteName}/api && npm install --unsafe-perm=true`)
       if (create.stderr.includes('fatal:')) {
         toolbox.print.error(`Failed to create site.`)
         return;
