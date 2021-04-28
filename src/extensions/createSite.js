@@ -16,6 +16,16 @@ module.exports = toolbox => {
       return toolbox.print.error('Invalid port supplied')
     }
     config.PORT = toolbox.parameters.options.p
+
+    let sites = await toolbox.listSites(false)
+    let ports = [];
+    for(let i in sites){
+      let site = sites[i];
+      let sitePort = site[1];
+      ports.push(parseInt(sitePort))
+    }
+    if(ports.includes(parseInt(config.PORT)))return toolbox.print.error(`PORT ${config.PORT} already in use.`)
+    // check if port already is in use
     // if (!toolbox.parameters.options.d) {
     //   toolbox.parameters.options.d = 'localhost'
     // }

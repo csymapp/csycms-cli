@@ -2,6 +2,7 @@ const shell = require('shelljs');
 const minify = require('minify');
 const { default: to } = require('await-to-js');
 const fs = require('fs')
+const axios = require('axios');
 // const escapeStringRegexp = require('escape-string-regexp')
 
 
@@ -57,6 +58,14 @@ module.exports = toolbox => {
             siteUrl += `${domain}:${PORT}`
         } else siteUrl += domain;
 
+
+        let siteWasRunning = true;
+        let [err, care] = await to(axios.get(siteUrl))
+        if(err)siteWasRunning = false;
+        if(!siteWasRunning){
+            await toolbox.startSite();
+            await (new Promise((resolve)=>setTimeout(()=>{resolve()},3000)))
+        }
         shell.exec(`cd /tmp && mkdir -p csycmsBuilds && cd csycmsBuilds && wget -mpEk ${siteUrl}`)
         shell.exec(`mkdir -p /var/www/html/csycms/csycmsBuilds`)
         shell.exec(`rm -rf /var/www/html/csycms/csycmsBuilds/${siteName}/docs && mkdir -p /var/www/html/csycms/csycmsBuilds/${siteName}`)
