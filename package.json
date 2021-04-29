@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "csycms CLI",
   "author": "Brian Onang'o",
-  "private": true,
+  "private": false,
   "bin": {
     "csycms": "bin/csycms"
   },
