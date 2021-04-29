@@ -18,12 +18,15 @@ module.exports = toolbox => {
     filesystem.dir('/var/www/html/csycms/themes');
     filesystem.dir('/var/www/html/csycms/templates');
     filesystem.dir('/var/www/html/csycms/public');
+    filesystem.dir('/etc/csycms/config');  // config directory
     filesystem.dir('/etc/csycms/sites-available');  // config directory
     filesystem.dir('/etc/csycms/sites-enabled');  // config directory
-    filesystem.dir('/usr/share/csycms/data'); 
+    filesystem.dir('/usr/share/csycms/data');
     filesystem.dir('/usr/share/csycms/bin');
 
-    await toolbox.pullTheme(true, 'default');
+    try {
+      await toolbox.pullTheme(true, 'default');
+    } catch (err) { }
 
     let serviceExists = await shell.exec(`systemctl status csycms`)
     if (serviceExists.stderr.includes('could not be found')) {
