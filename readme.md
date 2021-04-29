@@ -72,7 +72,7 @@ Welcome to the world of [CSECO](https://www.cseco.co.ke) and [Csyber Systems](ht
 ## Requirements
 
 - OS: linux
-- Node
+- Node v12+
 
 If you intend to use csycms to server your sites, then you'll need to install nginx to set up a reverse proxy.
 
@@ -98,8 +98,6 @@ sshKey: ~/.ssh/id_rsa # ssh key
 PORT: 2121 # port for communication between csycms and sites
 update: 86400 # system update interval in seconds
 ```
-
-
 
 ## todo
 - [ ] protected content.
