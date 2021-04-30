@@ -100,4 +100,7 @@ update: 86400 # system update interval in seconds
 ```
 
 ## todo
-- [ ] protected content.
+- [ ] Contact Page.
+- [ ] Custom Error Pages.
+- [ ] Protected Content.
+- [ ] Search.
