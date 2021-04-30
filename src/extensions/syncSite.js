@@ -22,6 +22,7 @@ module.exports = toolbox => {
     key = key.sshKey
     let message = toolbox.parameters.options.m
     shell.exec(`cd /var/www/html/csycms/${siteName} && git add . && git commit -m "${message}" && GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git push origin master`)
+    shell.exec(`cd /var/www/html/csycms/${siteName} && GIT_SSH_COMMAND='ssh -i ${key} -o IdentitiesOnly=yes' git push origin master`)
 
   }
 }
