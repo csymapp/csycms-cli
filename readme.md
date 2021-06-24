@@ -100,7 +100,10 @@ update: 86400 # system update interval in seconds
 ```
 
 ## todo
-- [ ] Contact Page.
+- [ ] Contact Page on site template & co.
 - [ ] Custom Error Pages.
 - [ ] Protected Content.
 - [ ] Search.
+- [ ] http -> https on github pages
+- [ ] Built with csycms
+- [ ] sync site without message
