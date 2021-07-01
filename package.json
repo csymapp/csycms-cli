@@ -1,33 +1,12 @@
 {
-  "name": "csycms",
-  "version": "2.0.5",
-  "description": "csycms CLI",
-  "author": "Brian Onang'o",
-  "private": false,
+  "author": {
+    "name": "Brian Onang'o",
+    "email": "surgbc@gmail.com"
+  },
   "bin": {
     "csycms": "bin/csycms"
   },
-  "scripts": {
-    "format": "prettier --write **/*.{js,json} && standard --fix",
-    "lint": "standard",
-    "test": "jest",
-    "watch": "jest --watch",
-    "snapupdate": "jest --updateSnapshot",
-    "coverage": "jest --coverage"
-  },
-  "files": [
-    "src",
-    "LICENSE",
-    "readme.md",
-    "docs",
-    "bin"
-  ],
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://raw.githubusercontent.com/csymapp/csycms-cli/master/LICENSE"
-    }
-  ],
+  "bundleDependencies": false,
   "dependencies": {
     "automatic-updates": "^1.0.4",
     "await-to-js": "^2.1.1",
@@ -38,26 +17,53 @@
     "gluegun": "latest",
     "js-yaml": "^3.14.0",
     "lowdb": "^1.0.0",
+    "minify": "^7.0.2",
     "nginx-conf": "^1.5.0",
     "node-etc": "^1.1.5",
     "service-systemd": "^3.5.1",
     "shelljs": "^0.8.4"
   },
+  "deprecated": false,
+  "description": "csycms CLI",
   "devDependencies": {
     "jest": "^24.1.0",
     "prettier": "^1.12.1",
     "standard": "^12.0.1"
   },
+  "files": [
+    "src",
+    "LICENSE",
+    "readme.md",
+    "docs",
+    "bin"
+  ],
   "jest": {
     "testEnvironment": "node"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "https://raw.githubusercontent.com/csymapp/csycms-cli/master/LICENSE"
+    }
+  ],
+  "name": "csycms",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "private": false,
+  "scripts": {
+    "coverage": "jest --coverage",
+    "format": "prettier --write **/*.{js,json} && standard --fix",
+    "lint": "standard",
+    "snapupdate": "jest --updateSnapshot",
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "standard": {
     "env": [
       "jest"
     ]
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  }
+  "version": "2.0.6"
 }

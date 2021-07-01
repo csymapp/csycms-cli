@@ -1802,10 +1802,10 @@ cssstyle@^1.0.0:
   dependencies:
     cssom "0.3.x"
 
-csycms-core@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/csycms-core/-/csycms-core-1.0.12.tgz#1062617556b601935c7ca6d2b885aa68c39b1219"
-  integrity sha512-CWLEgK7PKoArwkCe44kvVESy2sC52yX/KRX3YbPel2DbV05dPLdI5b7QSicb+uUat4OYW3xpSYEmIGNp84Depg==
+csycms-core@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/csycms-core/-/csycms-core-1.0.17.tgz#4c6b026618e29b2b4469f46a152defc6a63eaed1"
+  integrity sha512-rOjXPcgs+0D2r4Z9+DCVGoNzVng9IEae+BH7vyAOEl0sATltuCqTNJyYHlRU9W1thDZHPpuHwC4obBdhyM6oaw==
   dependencies:
     app-root-path "^3.0.0"
     await-to-js "^2.1.1"
